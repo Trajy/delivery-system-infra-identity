@@ -10,9 +10,9 @@ import org.springframework.transaction.interceptor.TransactionInterceptor;
 
 @Component
 @RequiredArgsConstructor
-public class TransactionalProxyBeanFactory {
+public class TransactionalProxyWrapperBeanFactory {
 
-    private final ProxyWrapperFactory proxyWrapperFactory;
+    private final ProxyWrapperBeanFactory proxyWrapperFactory;
     private final PlatformTransactionManager transactionManager;
 
     public <T> T createProxy(T target) {

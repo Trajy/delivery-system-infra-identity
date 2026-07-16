@@ -5,7 +5,7 @@ import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ProxyWrapperFactory {
+public class ProxyWrapperBeanFactory {
 
     public <T> T wrap(T target, Advice... advices) {
         final ProxyFactory proxyFactory = new ProxyFactory(target);
