@@ -1,20 +1,26 @@
-package br.com.trajy.delivery.infra.identity.core.common.domain.model;
+package br.com.trajy.delivery.infra.identity.core.common.domain.model.aggregate;
+
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.Instant;
+import java.util.UUID;
 
-public abstract class BaseDomain<T> {
+public abstract class BaseUUIDDAggregate {
 
-    private T id;
+    private UUID id;
 
+    @CreatedDate
     private Instant createdAt;
 
+    @LastModifiedDate
     private Instant updatedAt;
 
-    public T getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(T id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

@@ -1,7 +1,7 @@
 package br.com.trajy.delivery.infra.identity.framework.context.credential.model;
 
 
-import br.com.trajy.delivery.infra.identity.framework.common.entity.BaseEntity;
+import br.com.trajy.delivery.infra.identity.framework.common.entity.BaseUUIDEntity;
 import br.com.trajy.delivery.infra.identity.framework.context.user.model.UserEntity;
 import br.com.trajy.delivery.infra.identity.core.context.credential.domain.model.enums.CredentialStatus;
 import br.com.trajy.delivery.infra.identity.core.context.credential.domain.model.enums.HashAlgorithmType;
@@ -19,7 +19,7 @@ import static jakarta.persistence.FetchType.LAZY;
 @Entity
 @Getter
 @Setter
-public class PasswordCredentialEntity extends BaseEntity<Long> {
+public class PasswordCredentialEntity extends BaseUUIDEntity {
 
     private String passwordHash;
 

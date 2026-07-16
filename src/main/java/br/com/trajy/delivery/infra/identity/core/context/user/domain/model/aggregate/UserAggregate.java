@@ -1,9 +1,9 @@
 package br.com.trajy.delivery.infra.identity.core.context.user.domain.model.aggregate;
 
-import br.com.trajy.delivery.infra.identity.core.common.domain.model.BaseDomain;
+import br.com.trajy.delivery.infra.identity.core.common.domain.model.aggregate.BaseUUIDDAggregate;
 import br.com.trajy.delivery.infra.identity.core.context.user.domain.model.enums.UserStatus;
 
-public class User extends BaseDomain<Long> {
+public class UserAggregate extends BaseUUIDDAggregate {
 
     private String email;
     private UserStatus status;

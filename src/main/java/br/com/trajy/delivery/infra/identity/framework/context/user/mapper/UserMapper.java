@@ -3,7 +3,7 @@ package br.com.trajy.delivery.infra.identity.framework.context.user.mapper;
 import br.com.trajy.delivery.infra.identity.framework.context.user.model.CreateUserRequestModel;
 import br.com.trajy.delivery.infra.identity.framework.context.user.model.CreateUserResponseModel;
 import br.com.trajy.delivery.infra.identity.framework.context.user.model.UserEntity;
-import br.com.trajy.delivery.infra.identity.core.context.user.domain.model.aggregate.User;
+import br.com.trajy.delivery.infra.identity.core.context.user.domain.model.aggregate.UserAggregate;
 import org.mapstruct.Mapper;
 
 import static org.mapstruct.MappingConstants.ComponentModel.SPRING;
@@ -11,12 +11,12 @@ import static org.mapstruct.MappingConstants.ComponentModel.SPRING;
 @Mapper(componentModel = SPRING)
 public interface UserMapper {
 
-    User toDomain(UserEntity entity);
+    UserAggregate toDomain(UserEntity entity);
 
-    User toDomain(CreateUserRequestModel createRequestModel);
+    UserAggregate toDomain(CreateUserRequestModel createRequestModel);
 
-    UserEntity toEntity(User entity);
+    UserEntity toEntity(UserAggregate entity);
 
-    CreateUserResponseModel toResponse(User domain);
+    CreateUserResponseModel toResponse(UserAggregate domain);
 
 }

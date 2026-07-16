@@ -12,16 +12,17 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.Instant;
+import java.util.UUID;
 
 @EntityListeners(AuditingEntityListener.class)
 @MappedSuperclass
 @Getter
 @Setter
-public abstract class BaseEntity<T> {
+public abstract class BaseUUIDEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private T id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
 
     @CreatedDate
     private Instant createdAt;

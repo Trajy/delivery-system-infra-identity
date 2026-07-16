@@ -1,9 +1,9 @@
 package br.com.trajy.delivery.infra.identity.framework.context.credential.adapters;
 
-import br.com.trajy.delivery.infra.identity.framework.context.credential.mapper.PasswordCredentialMapper;
-import br.com.trajy.delivery.infra.identity.core.context.credential.domain.model.aggregate.PasswordCredential;
+import br.com.trajy.delivery.infra.identity.core.context.credential.domain.model.aggregate.PasswordCredentialAggregate;
 import br.com.trajy.delivery.infra.identity.core.context.credential.ports.PasswordCredentialRepositoryPort;
 import br.com.trajy.delivery.infra.identity.framework.context.credential.connectors.out.PasswordCredentialRepository;
+import br.com.trajy.delivery.infra.identity.framework.context.credential.mapper.PasswordCredentialMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -15,17 +15,17 @@ public class PasswordCredentialRepositoryAdapter implements PasswordCredentialRe
     private final PasswordCredentialMapper mapper;
 
     @Override
-    public PasswordCredential findById(Long id) {
+    public PasswordCredentialAggregate findById(Long id) {
         return this.repository.findById(id).map(this.mapper::toDomain).orElse(null);
     }
 
     @Override
-    public PasswordCredential save(PasswordCredential model) {
+    public PasswordCredentialAggregate save(PasswordCredentialAggregate model) {
         return this.mapper.toDomain(this.repository.save(this.mapper.toEntity(model)));
     }
 
     @Override
-    public PasswordCredential update(PasswordCredential model) {
+    public PasswordCredentialAggregate update(PasswordCredentialAggregate model) {
         return this.mapper.toDomain(this.repository.save(this.mapper.toEntity(model)));
     }
 

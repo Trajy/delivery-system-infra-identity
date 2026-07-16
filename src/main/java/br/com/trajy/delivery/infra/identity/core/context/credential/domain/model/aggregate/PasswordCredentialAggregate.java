@@ -1,22 +1,22 @@
 package br.com.trajy.delivery.infra.identity.core.context.credential.domain.model.aggregate;
 
-import br.com.trajy.delivery.infra.identity.core.common.domain.model.BaseDomain;
+import br.com.trajy.delivery.infra.identity.core.common.domain.model.aggregate.BaseUUIDDAggregate;
 import br.com.trajy.delivery.infra.identity.core.context.credential.domain.model.enums.CredentialStatus;
 import br.com.trajy.delivery.infra.identity.core.context.credential.domain.model.enums.HashAlgorithmType;
-import br.com.trajy.delivery.infra.identity.core.context.user.domain.model.aggregate.User;
+import br.com.trajy.delivery.infra.identity.core.context.user.domain.model.aggregate.UserAggregate;
 
-public class PasswordCredential extends BaseDomain<Long> {
+public class PasswordCredentialAggregate extends BaseUUIDDAggregate {
 
-    private User user;
+    private UserAggregate user;
     private String passwordHash;
     private HashAlgorithmType hashAlgorithmType;
     private CredentialStatus status;
 
-    public User getUser() {
+    public UserAggregate getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(UserAggregate user) {
         this.user = user;
     }
 
