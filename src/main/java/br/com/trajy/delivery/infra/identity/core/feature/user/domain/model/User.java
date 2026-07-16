@@ -1,24 +1,12 @@
 package br.com.trajy.delivery.infra.identity.core.feature.user.domain.model;
 
+import br.com.trajy.delivery.infra.identity.core.common.domain.model.BaseDomain;
 import br.com.trajy.delivery.infra.identity.core.feature.user.domain.enums.UserStatus;
 
-import java.time.Instant;
+public class User extends BaseDomain<Long> {
 
-public class User {
-
-    private Long id;
     private String email;
     private UserStatus status;
-    private Instant createdAt;
-    private Instant updatedAt;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getEmail() {
         return email;
@@ -34,22 +22,6 @@ public class User {
 
     public void setStatus(UserStatus status) {
         this.status = status;
-    }
-
-    public Instant getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Instant createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Instant getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Instant updatedAt) {
-        this.updatedAt = updatedAt;
     }
     
 }
