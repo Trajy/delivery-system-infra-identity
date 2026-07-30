@@ -13,6 +13,8 @@ import jakarta.persistence.OneToOne;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.Instant;
+
 import static jakarta.persistence.EnumType.STRING;
 import static jakarta.persistence.FetchType.LAZY;
 
@@ -22,6 +24,12 @@ import static jakarta.persistence.FetchType.LAZY;
 public class PasswordCredentialEntity extends BaseUUIDEntity {
 
     private String passwordHash;
+
+    private String passwordRefreshHash;
+
+    private Instant passwordHashExpiresAt;
+
+    private Instant passwordRefreshHashExpiresAt;
 
     @Enumerated(STRING)
     private HashAlgorithmType hashAlgorithmType;

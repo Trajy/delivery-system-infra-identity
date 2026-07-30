@@ -11,8 +11,8 @@ import br.com.trajy.delivery.infra.identity.core.context.user.ports.out.UserRepo
 
 import java.util.List;
 
+import static br.com.trajy.delivery.infra.identity.core.common.exception.model.ErrorContext.getErrorContext;
 import static br.com.trajy.delivery.infra.identity.core.common.exception.type.BusinessException.checkBusinessExeption;
-import static br.com.trajy.delivery.infra.identity.core.context.credential.domain.model.factory.PasswordCredentialFactory.createCredential;
 import static br.com.trajy.delivery.infra.identity.core.context.credential.domain.util.PasswordValidator.validatePassword;
 import static br.com.trajy.delivery.infra.identity.core.context.user.domain.model.factory.UserFactory.createUser;
 import static br.com.trajy.delivery.infra.identity.core.context.user.domain.util.UserValidator.validateUserUniqueFields;
@@ -33,21 +33,14 @@ public class CreateUserWithPasswordCredentialUseCase {
         this.passwordEncripterPort = passwordEncripterPort;
     }
 
-    public UserAggregate execute(CreateUserWithPasswordCredentialWrapperInput input) {
-        final ErrorContext<Error> errorContext = this.getErrorContext(input);
+    public void execute(CreateUserWithPasswordCredentialWrapperInput input) {
+        final ErrorContext<Error> errorContext = getErrorContext(CreateUserWithPasswordCredentialUseCase.class, validateInput(input));
         final UserAggregate user = createUser(input.email());
         final UserAggregate userPersisted = this.userRepositoryPort.save(user);
-        final PasswordCredentialAggregate credential = createCredential(userPersisted, this.passwordEncripterPort.encrypt(input.password()), this.passwordEncripterPort.getHashAlgorithmType());
+        final PasswordCredentialAggregate credential = this.passwordEncripterPort.encrypt(input.password());
+        credential.setUser(userPersisted);
         this.credentialRepositoryPort.save(credential);
         checkBusinessExeption(errorContext);
-        return userPersisted;
-    }
-
-    private ErrorContext<Error> getErrorContext(CreateUserWithPasswordCredentialWrapperInput input) {
-        return ErrorContext.<Error>builder()
-                .originClazz(CreateUserWithPasswordCredentialUseCase.class)
-                .errors(validateInput(input))
-                .build();
     }
 
     private List<Error> validateInput(CreateUserWithPasswordCredentialWrapperInput input) {

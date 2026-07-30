@@ -1,5 +1,8 @@
 package br.com.trajy.delivery.infra.identity.core.common.exception.model;
 
+import br.com.trajy.delivery.infra.identity.core.context.user.domain.model.wrapper.input.CreateUserWithPasswordCredentialWrapperInput;
+import br.com.trajy.delivery.infra.identity.core.context.user.domain.usecase.password.CreateUserWithPasswordCredentialUseCase;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,9 +25,14 @@ public class ErrorContext<T> {
     }
 
     public void appendErrors(List<T> additionalErrors) {
-        if (additionalErrors != null && !additionalErrors.isEmpty()) {
-            this.errors.addAll(additionalErrors);
-        }
+        this.errors.addAll(additionalErrors);
+    }
+
+    public static <E> ErrorContext<E> getErrorContext(Class<?> originClazz, List<E> errors) {
+        return ErrorContext.<E>builder()
+                .originClazz(originClazz)
+                .errors(errors)
+                .build();
     }
 
     public static <T> ErrorContextBuilder<T> builder() {
