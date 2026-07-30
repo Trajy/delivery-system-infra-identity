@@ -34,4 +34,9 @@ public class UserRepositoryAdapter implements UserRepositoryPort {
         this.repository.deleteById(id);
     }
 
+    @Override
+    public UserAggregate findByUniqueFields(String email) {
+        //TODO - Implement findByUniqueFields method
+        return null;
+    }
 }

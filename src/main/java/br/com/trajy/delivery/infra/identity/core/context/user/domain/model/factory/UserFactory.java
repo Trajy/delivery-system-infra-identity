@@ -2,7 +2,7 @@ package br.com.trajy.delivery.infra.identity.core.context.user.domain.model.fact
 
 import br.com.trajy.delivery.infra.identity.core.context.user.domain.model.aggregate.UserAggregate;
 
-import static br.com.trajy.delivery.infra.identity.core.common.exception.UnsupportedInstantiationException.utilityClassUnsupportedInstantiationException;
+import static br.com.trajy.delivery.infra.identity.core.common.exception.type.UnsupportedInstantiationException.utilityClassUnsupportedInstantiationException;
 import static br.com.trajy.delivery.infra.identity.core.context.user.domain.model.enums.UserStatus.ACTIVE;
 
 public final class UserFactory {

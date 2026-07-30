@@ -4,7 +4,7 @@ import br.com.trajy.delivery.infra.identity.framework.context.user.mapper.UserMa
 import br.com.trajy.delivery.infra.identity.framework.context.user.model.CreateUserRequestModel;
 import br.com.trajy.delivery.infra.identity.framework.context.user.model.CreateUserResponseModel;
 import br.com.trajy.delivery.infra.identity.core.context.user.domain.model.wrapper.input.CreateUserWithPasswordCredentialWrapperInput;
-import br.com.trajy.delivery.infra.identity.core.context.user.domain.usecase.CreateUserWithPasswordCredentialUseCase;
+import br.com.trajy.delivery.infra.identity.core.context.user.domain.usecase.password.CreateUserWithPasswordCredentialUseCase;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +24,7 @@ public class UserRestController {
     private final CreateUserWithPasswordCredentialUseCase createUserWithPasswordCredentialUseCase;
 
     @Transactional
-    @PostMapping(consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+    @PostMapping(path = "/registrations", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<CreateUserResponseModel> createUser(@RequestBody CreateUserRequestModel requestModel) {
         return ResponseEntity.ok(
                 this.mapper.toResponse(

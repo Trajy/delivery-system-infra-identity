@@ -23,8 +23,6 @@ public class TransactionalProxyWrapperBeanFactory {
         return this.proxyWrapperFactory.wrap(target, this.createTransactionInterceptor(TransactionDefinition.PROPAGATION_REQUIRED, true));
     }
 
-
-
     private TransactionInterceptor createTransactionInterceptor(int transactionDefinition, boolean isReadOnly) {
         final TransactionInterceptor interceptor = new TransactionInterceptor();
         interceptor.setTransactionManager(transactionManager);

@@ -4,7 +4,7 @@ import br.com.trajy.delivery.infra.identity.core.context.credential.domain.model
 import br.com.trajy.delivery.infra.identity.core.context.credential.domain.model.enums.HashAlgorithmType;
 import br.com.trajy.delivery.infra.identity.core.context.user.domain.model.aggregate.UserAggregate;
 
-import static br.com.trajy.delivery.infra.identity.core.common.exception.UnsupportedInstantiationException.utilityClassUnsupportedInstantiationException;
+import static br.com.trajy.delivery.infra.identity.core.common.exception.type.UnsupportedInstantiationException.utilityClassUnsupportedInstantiationException;
 import static br.com.trajy.delivery.infra.identity.core.context.credential.domain.model.enums.CredentialStatus.ACTIVE;
 
 public final class PasswordCredentialFactory {
@@ -13,7 +13,7 @@ public final class PasswordCredentialFactory {
         utilityClassUnsupportedInstantiationException();
     }
 
-    public static PasswordCredentialAggregate create(UserAggregate user, String passwordHash, HashAlgorithmType hashAlgorithmType) {
+    public static PasswordCredentialAggregate createCredential(UserAggregate user, String passwordHash, HashAlgorithmType hashAlgorithmType) {
         final PasswordCredentialAggregate model = new PasswordCredentialAggregate();
         model.setUser(user);
         model.setPasswordHash(passwordHash);

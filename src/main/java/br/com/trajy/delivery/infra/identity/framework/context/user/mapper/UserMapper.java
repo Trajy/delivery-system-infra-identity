@@ -15,7 +15,7 @@ public interface UserMapper {
 
     UserAggregate toDomain(CreateUserRequestModel createRequestModel);
 
-    UserEntity toEntity(UserAggregate entity);
+    UserEntity toEntity(UserAggregate aggregate);
 
     CreateUserResponseModel toResponse(UserAggregate domain);
 
