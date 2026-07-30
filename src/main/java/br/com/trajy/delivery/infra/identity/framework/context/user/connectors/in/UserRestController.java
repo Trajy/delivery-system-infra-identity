@@ -23,11 +23,11 @@ public class UserRestController {
     private final UserMapper mapper;
     private final CreateUserWithPasswordCredentialUseCase createUserWithPasswordCredentialUseCase;
 
-    @Transactional
     @PostMapping(path = "/registrations", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> createUser(@RequestBody CreateUserRequestModel requestModel) {
         this.createUserWithPasswordCredentialUseCase.execute(new CreateUserWithPasswordCredentialWrapperInput(requestModel.email(), requestModel.password()));
         return ok().build();
     }
+
 
 }
