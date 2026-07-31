@@ -1,4 +1,4 @@
-package br.com.trajy.delivery.infra.identity.core.usecase.password;
+package br.com.trajy.delivery.infra.identity.core.feature.password.usecase;
 
 import br.com.trajy.delivery.infra.identity.core.common.exception.model.Error;
 import br.com.trajy.delivery.infra.identity.core.common.exception.model.ErrorContext;
@@ -6,7 +6,7 @@ import br.com.trajy.delivery.infra.identity.core.context.credential.domain.model
 import br.com.trajy.delivery.infra.identity.core.context.credential.ports.PasswordCredentialRepositoryPort;
 import br.com.trajy.delivery.infra.identity.core.context.credential.ports.PasswordEncripterPort;
 import br.com.trajy.delivery.infra.identity.core.context.user.domain.model.aggregate.UserAggregate;
-import br.com.trajy.delivery.infra.identity.core.context.user.domain.model.wrapper.input.CreateUserWithPasswordCredentialWrapperInput;
+import br.com.trajy.delivery.infra.identity.core.feature.password.model.wrapper.input.CreateUserWithPasswordCredentialWrapperInput;
 import br.com.trajy.delivery.infra.identity.core.context.user.ports.UserRepositoryPort;
 
 import java.util.List;

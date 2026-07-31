@@ -2,7 +2,7 @@ package br.com.trajy.delivery.infra.identity.core.context.user.domain.util;
 
 import br.com.trajy.delivery.infra.identity.core.common.exception.model.Error;
 import br.com.trajy.delivery.infra.identity.core.context.user.domain.model.aggregate.UserAggregate;
-import br.com.trajy.delivery.infra.identity.core.context.user.domain.model.wrapper.input.CreateUserWithPasswordCredentialWrapperInput;
+import br.com.trajy.delivery.infra.identity.core.feature.password.model.wrapper.input.CreateUserWithPasswordCredentialWrapperInput;
 
 import java.util.ArrayList;
 import java.util.List;

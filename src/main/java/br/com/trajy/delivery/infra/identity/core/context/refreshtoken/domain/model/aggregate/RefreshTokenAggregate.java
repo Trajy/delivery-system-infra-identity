@@ -8,13 +8,9 @@ import java.time.Instant;
 public class RefreshTokenAggregate extends BaseUUIDDAggregate {
 
     private String tokenHash;
-
     private Instant expiresAt;
-
     private Instant usedAt;
-
     private Instant revokedAt;
-
     private RefreshTokenStatusType status;
 
     public String getTokenHash() {

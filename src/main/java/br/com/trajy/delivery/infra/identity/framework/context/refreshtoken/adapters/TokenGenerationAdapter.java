@@ -2,7 +2,7 @@ package br.com.trajy.delivery.infra.identity.framework.context.refreshtoken.adap
 
 import br.com.trajy.delivery.infra.identity.core.context.refreshtoken.domain.model.aggregate.RefreshTokenAggregate;
 import br.com.trajy.delivery.infra.identity.core.context.refreshtoken.ports.TokenGenerationPort;
-import br.com.trajy.delivery.infra.identity.core.context.user.domain.model.wrapper.input.LoginWithPasswordCredentialWrapperInput;
+import br.com.trajy.delivery.infra.identity.core.feature.password.model.wrapper.input.LoginWithPasswordCredentialWrapperInput;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

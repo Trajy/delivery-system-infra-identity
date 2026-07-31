@@ -1,4 +1,4 @@
-package br.com.trajy.delivery.infra.identity.core.usecase.password;
+package br.com.trajy.delivery.infra.identity.core.feature.password.usecase;
 
 import br.com.trajy.delivery.infra.identity.core.common.exception.model.Error;
 import br.com.trajy.delivery.infra.identity.core.common.exception.model.ErrorContext;
@@ -11,9 +11,7 @@ import br.com.trajy.delivery.infra.identity.core.context.session.ports.SessionRe
 import br.com.trajy.delivery.infra.identity.core.context.refreshtoken.domain.model.aggregate.RefreshTokenAggregate;
 import br.com.trajy.delivery.infra.identity.core.context.refreshtoken.ports.TokenGenerationPort;
 import br.com.trajy.delivery.infra.identity.core.context.user.domain.model.aggregate.UserAggregate;
-import br.com.trajy.delivery.infra.identity.core.context.user.domain.model.wrapper.input.LoginWithPasswordCredentialWrapperInput;
-import br.com.trajy.delivery.infra.identity.core.context.user.ports.UserRepositoryPort;
-import br.com.trajy.delivery.infra.identity.framework.context.credential.connectors.out.PasswordCredentialRepository;
+import br.com.trajy.delivery.infra.identity.core.feature.password.model.wrapper.input.LoginWithPasswordCredentialWrapperInput;
 
 import static br.com.trajy.delivery.infra.identity.core.common.exception.model.Error.withDescription;
 import static br.com.trajy.delivery.infra.identity.core.common.exception.model.ErrorContext.getErrorContext;

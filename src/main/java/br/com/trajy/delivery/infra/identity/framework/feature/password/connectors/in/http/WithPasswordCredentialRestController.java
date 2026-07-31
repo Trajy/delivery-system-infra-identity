@@ -1,7 +1,7 @@
-package br.com.trajy.delivery.infra.identity.framework.feature.connectors.in.http;
+package br.com.trajy.delivery.infra.identity.framework.feature.password.connectors.in.http;
 
-import br.com.trajy.delivery.infra.identity.core.usecase.password.CreateWithPasswordCredentialUseCase;
-import br.com.trajy.delivery.infra.identity.core.usecase.password.LoginWithPasswordCredentialUseCase;
+import br.com.trajy.delivery.infra.identity.core.feature.password.usecase.CreateWithPasswordCredentialUseCase;
+import br.com.trajy.delivery.infra.identity.core.feature.password.usecase.LoginWithPasswordCredentialUseCase;
 import br.com.trajy.delivery.infra.identity.framework.context.user.mapper.UserWithPasswordCredentialMapper;
 import br.com.trajy.delivery.infra.identity.framework.context.user.model.CreateUserWithPasswordCredentialRequestModel;
 import br.com.trajy.delivery.infra.identity.framework.context.user.model.LoginWithPasswordCredentialRequestModel;

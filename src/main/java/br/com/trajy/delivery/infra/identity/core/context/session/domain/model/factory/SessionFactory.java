@@ -3,7 +3,7 @@ package br.com.trajy.delivery.infra.identity.core.context.session.domain.model.f
 import br.com.trajy.delivery.infra.identity.core.context.session.domain.model.aggregate.SessionAggregate;
 import br.com.trajy.delivery.infra.identity.core.context.refreshtoken.domain.model.aggregate.RefreshTokenAggregate;
 import br.com.trajy.delivery.infra.identity.core.context.user.domain.model.aggregate.UserAggregate;
-import br.com.trajy.delivery.infra.identity.core.context.user.domain.model.wrapper.input.LoginWithPasswordCredentialWrapperInput;
+import br.com.trajy.delivery.infra.identity.core.feature.password.model.wrapper.input.LoginWithPasswordCredentialWrapperInput;
 
 import java.util.List;
 

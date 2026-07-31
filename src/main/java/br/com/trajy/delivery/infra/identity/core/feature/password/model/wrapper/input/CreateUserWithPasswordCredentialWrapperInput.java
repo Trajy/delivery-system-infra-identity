@@ -1,4 +1,4 @@
-package br.com.trajy.delivery.infra.identity.core.context.user.domain.model.wrapper.input;
+package br.com.trajy.delivery.infra.identity.core.feature.password.model.wrapper.input;
 
 public record CreateUserWithPasswordCredentialWrapperInput(
         String email,
