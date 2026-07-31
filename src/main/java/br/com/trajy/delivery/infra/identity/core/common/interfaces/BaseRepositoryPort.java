@@ -1,12 +1,12 @@
 package br.com.trajy.delivery.infra.identity.core.common.interfaces;
 
-public interface BaseRepositoryPort<T, I> {
+public interface BaseRepositoryPort<A, I> {
 
-    T findById(I id);
+    A findById(I id);
 
-    T save(T model);
+    A save(A aggregate);
 
-    T update(T model);
+    A update(A aggregate);
 
     void delete(I id);
 }

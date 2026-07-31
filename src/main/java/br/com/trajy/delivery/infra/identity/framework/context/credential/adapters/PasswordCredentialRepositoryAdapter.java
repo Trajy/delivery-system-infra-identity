@@ -33,4 +33,10 @@ public class PasswordCredentialRepositoryAdapter implements PasswordCredentialRe
     public void delete(Long id) {
         this.repository.deleteById(id);
     }
+
+    @Override
+    public PasswordCredentialAggregate findByPasswordHash(String passwordHash) {
+        return this.repository.findByPasswordHash(passwordHash);
+    }
+
 }

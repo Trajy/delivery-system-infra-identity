@@ -2,12 +2,13 @@ package br.com.trajy.delivery.infra.identity.core.common.exception.type;
 
 import br.com.trajy.delivery.infra.identity.core.common.exception.model.ErrorContext;
 
+import static java.util.Objects.nonNull;
+
 public class BusinessException extends RuntimeException {
 
     private final ErrorContext<?> errorContext;
 
-    public BusinessException(ErrorContext<?> context) {
-        super();
+    public <E> BusinessException(ErrorContext<E> context) {
         this.errorContext = context;
     }
 
@@ -15,8 +16,8 @@ public class BusinessException extends RuntimeException {
         return errorContext;
     }
 
-    public static void checkBusinessExeption(ErrorContext errorContext) {
-        if(errorContext != null && errorContext.getErrors() != null && !errorContext.getErrors().isEmpty()) {
+    public static <E> void checkBusinessException(ErrorContext<E> errorContext) {
+        if(nonNull(errorContext) && nonNull(errorContext.getErrors()) && !errorContext.getErrors().isEmpty()) {
             throw new BusinessException(errorContext);
         }
     }

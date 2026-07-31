@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.interceptor.MatchAlwaysTransactionAttributeSource;
+import org.springframework.transaction.interceptor.RollbackRuleAttribute;
 import org.springframework.transaction.interceptor.RuleBasedTransactionAttribute;
 import org.springframework.transaction.interceptor.TransactionInterceptor;
 
@@ -37,8 +38,8 @@ public class TransactionalProxyWrapperBeanFactory {
         final RuleBasedTransactionAttribute attribute = new RuleBasedTransactionAttribute();
         attribute.setPropagationBehavior(transactionDefinition);
         attribute.setReadOnly(isReadOnly);
+        attribute.getRollbackRules().add(new RollbackRuleAttribute(Exception.class));
         return attribute;
     }
-
 
 }

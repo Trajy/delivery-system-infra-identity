@@ -5,7 +5,7 @@ import br.com.trajy.delivery.infra.identity.core.context.user.domain.model.enums
 import java.time.Instant;
 import java.util.UUID;
 
-public record CreateUserResponseModel(
+public record CreateUserWithPasswordCredentialResponseModel(
         UUID id,
         String email,
         UserStatus status,

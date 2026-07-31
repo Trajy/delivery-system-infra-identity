@@ -4,6 +4,6 @@ import br.com.trajy.delivery.infra.identity.core.context.credential.domain.model
 
 public interface PasswordEncripterPort {
 
-    PasswordCredentialAggregate encrypt(String password);
+    void populateWithEncrypt(PasswordCredentialAggregate aggregate, String password);
 
 }

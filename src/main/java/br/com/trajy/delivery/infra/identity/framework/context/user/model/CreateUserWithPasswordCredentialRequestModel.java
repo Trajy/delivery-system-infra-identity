@@ -1,7 +1,6 @@
 package br.com.trajy.delivery.infra.identity.framework.context.user.model;
 
-public record CreateUserRequestModel(
+public record CreateUserWithPasswordCredentialRequestModel(
         String email,
-        String password,
-        String type
+        String password
 ) { }

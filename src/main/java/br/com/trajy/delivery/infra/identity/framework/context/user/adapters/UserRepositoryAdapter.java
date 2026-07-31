@@ -1,9 +1,9 @@
 package br.com.trajy.delivery.infra.identity.framework.context.user.adapters;
 
-import br.com.trajy.delivery.infra.identity.framework.context.user.mapper.UserMapper;
+import br.com.trajy.delivery.infra.identity.framework.context.user.mapper.UserWithPasswordCredentialMapper;
 import br.com.trajy.delivery.infra.identity.core.context.user.domain.model.aggregate.UserAggregate;
-import br.com.trajy.delivery.infra.identity.core.context.user.ports.out.UserRepositoryPort;
-import br.com.trajy.delivery.infra.identity.framework.context.user.connectors.out.UserRepository;
+import br.com.trajy.delivery.infra.identity.core.context.user.ports.UserRepositoryPort;
+import br.com.trajy.delivery.infra.identity.framework.context.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 public class UserRepositoryAdapter implements UserRepositoryPort {
 
     private final UserRepository repository;
-    private final UserMapper mapper;
+    private final UserWithPasswordCredentialMapper mapper;
 
     @Override
     public UserAggregate findById(Long id) {
@@ -20,13 +20,13 @@ public class UserRepositoryAdapter implements UserRepositoryPort {
     }
 
     @Override
-    public UserAggregate save(UserAggregate model) {
-        return this.mapper.toDomain(this.repository.save(this.mapper.toEntity(model)));
+    public UserAggregate save(UserAggregate aggregate) {
+        return this.mapper.toDomain(this.repository.save(this.mapper.toEntity(aggregate)));
     }
 
     @Override
-    public UserAggregate update(UserAggregate model) {
-        return this.mapper.toDomain(this.repository.save(this.mapper.toEntity(model)));
+    public UserAggregate update(UserAggregate aggregate) {
+        return this.mapper.toDomain(this.repository.save(this.mapper.toEntity(aggregate)));
     }
 
     @Override
@@ -39,4 +39,11 @@ public class UserRepositoryAdapter implements UserRepositoryPort {
         //TODO - Implement findByUniqueFields method
         return null;
     }
+
+    @Override
+    public UserAggregate findByIdentifier(String identifier) {
+        //TODO - Implement findByIdentifier method
+        return null;
+    }
+
 }

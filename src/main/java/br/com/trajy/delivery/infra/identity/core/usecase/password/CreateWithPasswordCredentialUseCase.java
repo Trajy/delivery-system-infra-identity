@@ -1,4 +1,4 @@
-package br.com.trajy.delivery.infra.identity.core.context.user.domain.usecase.password;
+package br.com.trajy.delivery.infra.identity.core.usecase.password;
 
 import br.com.trajy.delivery.infra.identity.core.common.exception.model.Error;
 import br.com.trajy.delivery.infra.identity.core.common.exception.model.ErrorContext;
@@ -7,23 +7,24 @@ import br.com.trajy.delivery.infra.identity.core.context.credential.ports.Passwo
 import br.com.trajy.delivery.infra.identity.core.context.credential.ports.PasswordEncripterPort;
 import br.com.trajy.delivery.infra.identity.core.context.user.domain.model.aggregate.UserAggregate;
 import br.com.trajy.delivery.infra.identity.core.context.user.domain.model.wrapper.input.CreateUserWithPasswordCredentialWrapperInput;
-import br.com.trajy.delivery.infra.identity.core.context.user.ports.out.UserRepositoryPort;
+import br.com.trajy.delivery.infra.identity.core.context.user.ports.UserRepositoryPort;
 
 import java.util.List;
 
 import static br.com.trajy.delivery.infra.identity.core.common.exception.model.ErrorContext.getErrorContext;
-import static br.com.trajy.delivery.infra.identity.core.common.exception.type.BusinessException.checkBusinessExeption;
-import static br.com.trajy.delivery.infra.identity.core.context.credential.domain.util.PasswordValidator.validatePassword;
+import static br.com.trajy.delivery.infra.identity.core.common.exception.type.BusinessException.checkBusinessException;
+import static br.com.trajy.delivery.infra.identity.core.context.credential.domain.model.factory.PasswordCredentialFactory.createPasswordCredential;
+import static br.com.trajy.delivery.infra.identity.core.context.credential.domain.util.PasswordCredentialValidator.validatePassword;
 import static br.com.trajy.delivery.infra.identity.core.context.user.domain.model.factory.UserFactory.createUser;
 import static br.com.trajy.delivery.infra.identity.core.context.user.domain.util.UserValidator.validateUserUniqueFields;
 
-public class CreateUserWithPasswordCredentialUseCase {
+public class CreateWithPasswordCredentialUseCase {
 
     private final UserRepositoryPort userRepositoryPort;
     private final PasswordCredentialRepositoryPort credentialRepositoryPort;
     private final PasswordEncripterPort passwordEncripterPort;
 
-    public CreateUserWithPasswordCredentialUseCase(
+    public CreateWithPasswordCredentialUseCase(
             UserRepositoryPort userRepositoryPort,
             PasswordCredentialRepositoryPort credentialRepositoryPort,
             PasswordEncripterPort passwordEncripterPort
@@ -34,13 +35,12 @@ public class CreateUserWithPasswordCredentialUseCase {
     }
 
     public void execute(CreateUserWithPasswordCredentialWrapperInput input) {
-        final ErrorContext<Error> errorContext = getErrorContext(CreateUserWithPasswordCredentialUseCase.class, validateInput(input));
+        final ErrorContext<Error> errorContext = getErrorContext(CreateWithPasswordCredentialUseCase.class, validateInput(input));
         final UserAggregate user = createUser(input.email());
-        final UserAggregate userPersisted = this.userRepositoryPort.save(user);
-        final PasswordCredentialAggregate credential = this.passwordEncripterPort.encrypt(input.password());
-        credential.setUser(userPersisted);
-        this.credentialRepositoryPort.save(credential);
-        checkBusinessExeption(errorContext);
+        final PasswordCredentialAggregate passwordCredential = createPasswordCredential(user);
+        this.passwordEncripterPort.populateWithEncrypt(passwordCredential, input.password());
+        this.credentialRepositoryPort.save(passwordCredential);
+        checkBusinessException(errorContext);
     }
 
     private List<Error> validateInput(CreateUserWithPasswordCredentialWrapperInput input) {

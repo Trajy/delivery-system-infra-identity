@@ -12,6 +12,10 @@ public class Error {
         return description;
     }
 
+    public static Error withDescription(String message) {
+        return Error.builder().description(message).build();
+    }
+
     public static ErrorBuilder builder() {
         return new ErrorBuilder();
     }
