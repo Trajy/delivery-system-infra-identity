@@ -1,7 +1,7 @@
 package br.com.trajy.delivery.infra.identity.framework.context.refreshtoken.adapters;
 
 import br.com.trajy.delivery.infra.identity.core.context.refreshtoken.domain.model.aggregate.RefreshTokenAggregate;
-import br.com.trajy.delivery.infra.identity.core.context.refreshtoken.ports.TokenRepositoryPort;
+import br.com.trajy.delivery.infra.identity.core.context.refreshtoken.ports.RefreshTokenRepositoryPort;
 import br.com.trajy.delivery.infra.identity.framework.context.refreshtoken.mapper.RefreshTokenMapper;
 import br.com.trajy.delivery.infra.identity.framework.context.refreshtoken.repository.RefreshTokenRepository;
 import lombok.RequiredArgsConstructor;
@@ -11,7 +11,7 @@ import java.util.UUID;
 
 @Component
 @RequiredArgsConstructor
-public class TokenRepositoryAdapter implements TokenRepositoryPort {
+public class RefreshTokenRepositoryAdapter implements RefreshTokenRepositoryPort {
 
     private final RefreshTokenRepository repository;
     private final RefreshTokenMapper mapper;

@@ -1,5 +1,6 @@
 package br.com.trajy.delivery.infra.identity.core.context.session.domain.model.factory;
 
+import br.com.trajy.delivery.infra.identity.core.context.credential.domain.model.aggregate.PasswordCredentialAggregate;
 import br.com.trajy.delivery.infra.identity.core.context.session.domain.model.aggregate.SessionAggregate;
 import br.com.trajy.delivery.infra.identity.core.context.refreshtoken.domain.model.aggregate.RefreshTokenAggregate;
 import br.com.trajy.delivery.infra.identity.core.context.user.domain.model.aggregate.UserAggregate;
@@ -16,9 +17,9 @@ public final class SessionFactory {
         utilityClassUnsupportedInstantiationException();
     }
 
-    public static SessionAggregate createSession(LoginWithPasswordCredentialWrapperInput input, UserAggregate userAggregate, List<RefreshTokenAggregate> refreshTokenAggregates) {
+    public static SessionAggregate createSession(LoginWithPasswordCredentialWrapperInput input, PasswordCredentialAggregate passwordCredentialAggregate, List<RefreshTokenAggregate> refreshTokenAggregates) {
         final SessionAggregate aggregate = new SessionAggregate();
-        aggregate.setUser(userAggregate);
+        aggregate.setUser(passwordCredentialAggregate.getUser());
         aggregate.setTokens(refreshTokenAggregates);
         aggregate.setStatus(ACTIVE);
         return aggregate;

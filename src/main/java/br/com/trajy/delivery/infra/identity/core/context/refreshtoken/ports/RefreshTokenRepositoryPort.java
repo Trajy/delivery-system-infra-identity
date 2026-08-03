@@ -5,6 +5,6 @@ import br.com.trajy.delivery.infra.identity.core.context.refreshtoken.domain.mod
 
 import java.util.UUID;
 
-public interface TokenRepositoryPort extends BaseRepositoryPort<RefreshTokenAggregate, UUID> {
+public interface RefreshTokenRepositoryPort extends BaseRepositoryPort<RefreshTokenAggregate, UUID> {
 
 }

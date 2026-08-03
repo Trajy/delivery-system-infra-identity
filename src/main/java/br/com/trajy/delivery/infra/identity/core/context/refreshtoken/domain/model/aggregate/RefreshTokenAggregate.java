@@ -2,6 +2,7 @@ package br.com.trajy.delivery.infra.identity.core.context.refreshtoken.domain.mo
 
 import br.com.trajy.delivery.infra.identity.core.common.domain.model.aggregate.BaseUUIDDAggregate;
 import br.com.trajy.delivery.infra.identity.core.context.refreshtoken.domain.model.enums.RefreshTokenStatusType;
+import br.com.trajy.delivery.infra.identity.core.context.refreshtoken.domain.model.enums.EncryptionType;
 
 import java.time.Instant;
 
@@ -12,6 +13,7 @@ public class RefreshTokenAggregate extends BaseUUIDDAggregate {
     private Instant usedAt;
     private Instant revokedAt;
     private RefreshTokenStatusType status;
+    private EncryptionType encryptionType;
 
     public String getTokenHash() {
         return tokenHash;
@@ -51,6 +53,14 @@ public class RefreshTokenAggregate extends BaseUUIDDAggregate {
 
     public void setStatus(RefreshTokenStatusType status) {
         this.status = status;
+    }
+
+    public EncryptionType getEncryptionType() {
+        return encryptionType;
+    }
+
+    public void setEncryptionType(EncryptionType encryptionType) {
+        this.encryptionType = encryptionType;
     }
 
 }

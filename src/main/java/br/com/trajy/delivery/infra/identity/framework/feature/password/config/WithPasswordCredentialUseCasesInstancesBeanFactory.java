@@ -4,7 +4,7 @@ import br.com.trajy.delivery.infra.identity.core.feature.password.usecase.LoginW
 import br.com.trajy.delivery.infra.identity.framework.common.proxy.TransactionalProxyWrapperBeanFactory;
 import br.com.trajy.delivery.infra.identity.framework.context.credential.adapters.PasswordCredentialRepositoryAdapter;
 import br.com.trajy.delivery.infra.identity.framework.context.credential.adapters.PasswordEncripterAdapter;
-import br.com.trajy.delivery.infra.identity.framework.context.refreshtoken.adapters.TokenGenerationAdapter;
+import br.com.trajy.delivery.infra.identity.framework.context.refreshtoken.adapters.EncryptionJwtStrategyAdapter;
 import br.com.trajy.delivery.infra.identity.framework.context.session.adapters.SessionRepositoryAdapter;
 import br.com.trajy.delivery.infra.identity.framework.context.user.adapters.UserRepositoryAdapter;
 import br.com.trajy.delivery.infra.identity.core.feature.password.usecase.CreateWithPasswordCredentialUseCase;
@@ -37,7 +37,7 @@ public class WithPasswordCredentialUseCasesInstancesBeanFactory {
             PasswordCredentialRepositoryAdapter passwordCredentialRepositoryAdapter,
             PasswordEncripterAdapter passwordEncripterAdapter,
             SessionRepositoryAdapter sessionRepositoryAdapter,
-            TokenGenerationAdapter tokenGenerationAdapter
+            EncryptionJwtStrategyAdapter tokenGenerationAdapter
     ) {
         final LoginWithPasswordCredentialUseCase usecase = new LoginWithPasswordCredentialUseCase(
                 passwordCredentialRepositoryAdapter,
