@@ -1,8 +1,5 @@
 package br.com.trajy.delivery.infra.identity.core.common.utils;
 
-import br.com.trajy.delivery.infra.identity.core.context.refreshtoken.domain.model.enums.EncryptionType;
-import br.com.trajy.delivery.infra.identity.core.context.refreshtoken.ports.EncryptionStrategyPort;
-
 import java.lang.annotation.Annotation;
 
 import static br.com.trajy.delivery.infra.identity.core.common.exception.type.UnsupportedInstantiationException.utilityClassUnsupportedInstantiationException;
