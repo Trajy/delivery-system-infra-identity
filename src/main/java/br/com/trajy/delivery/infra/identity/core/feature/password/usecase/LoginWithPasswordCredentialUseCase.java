@@ -4,9 +4,8 @@ import br.com.trajy.delivery.infra.identity.core.common.exception.model.Error;
 import br.com.trajy.delivery.infra.identity.core.common.exception.model.ErrorContext;
 import br.com.trajy.delivery.infra.identity.core.context.credential.domain.model.aggregate.PasswordCredentialAggregate;
 import br.com.trajy.delivery.infra.identity.core.context.credential.ports.PasswordCredentialRepositoryPort;
-import br.com.trajy.delivery.infra.identity.core.context.credential.ports.PasswordEncripterPort;
+import br.com.trajy.delivery.infra.identity.core.context.credential.registry.PasswordHashStrategyRegistry;
 import br.com.trajy.delivery.infra.identity.core.context.refreshtoken.domain.model.aggregate.RefreshTokenAggregate;
-import br.com.trajy.delivery.infra.identity.core.context.refreshtoken.ports.EncryptionStrategyPort;
 import br.com.trajy.delivery.infra.identity.core.context.refreshtoken.registry.EncryptionStrategyRegistry;
 import br.com.trajy.delivery.infra.identity.core.context.session.domain.model.aggregate.SessionAggregate;
 import br.com.trajy.delivery.infra.identity.core.context.session.ports.SessionRepositoryPort;
@@ -26,24 +25,21 @@ import static java.util.Objects.isNull;
 public class LoginWithPasswordCredentialUseCase {
 
     private final PasswordCredentialRepositoryPort passwordCredentialRepositoryPort;
-    private final PasswordEncripterPort passwordEncripterPort;
     private final SessionRepositoryPort sessionRepositoryPort;
 
     public LoginWithPasswordCredentialUseCase(
             PasswordCredentialRepositoryPort passwordCredentialRepository,
-            PasswordEncripterPort passwordEncripterPort,
             SessionRepositoryPort sessionRepositoryPort
     ) {
         this.passwordCredentialRepositoryPort = passwordCredentialRepository;
-        this.passwordEncripterPort = passwordEncripterPort;
         this.sessionRepositoryPort = sessionRepositoryPort;
     }
 
     public SessionAggregate execute(LoginWithPasswordCredentialWrapperInput input) {
         final ErrorContext<Error> errorContext = getErrorContext(LoginWithPasswordCredentialUseCase.class);
-        final PasswordCredentialAggregate encryptedPasswordCredentialAggregate = createPasswordCredential(null);
-        this.passwordEncripterPort.populateWithEncrypt(encryptedPasswordCredentialAggregate, input.password());
-        final PasswordCredentialAggregate passwordCredentialAggregate = this.passwordCredentialRepositoryPort.findByPasswordHash(encryptedPasswordCredentialAggregate.getPasswordHash());
+        final PasswordCredentialAggregate passwordCredentialAggregate = this.passwordCredentialRepositoryPort.findByIdentifier(input.identifier());
+        final PasswordCredentialAggregate encryptedPasswordCredentialAggregate = PasswordHashStrategyRegistry.get(passwordCredentialAggregate.getHashAlgorithmType())
+                .populateWithEncrypt(createPasswordCredential(input, passwordCredentialAggregate.getUser()), input.password());
         validatePasswordCredentialConsistency(errorContext.getOriginClazz(), encryptedPasswordCredentialAggregate, passwordCredentialAggregate);
         this.validateCredentials(errorContext, passwordCredentialAggregate, input);
         final RefreshTokenAggregate refreshTokenAggregate = createRefreshToken(input);

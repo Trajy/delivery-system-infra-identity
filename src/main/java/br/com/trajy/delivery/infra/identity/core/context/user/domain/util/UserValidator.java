@@ -2,7 +2,7 @@ package br.com.trajy.delivery.infra.identity.core.context.user.domain.util;
 
 import br.com.trajy.delivery.infra.identity.core.common.exception.model.Error;
 import br.com.trajy.delivery.infra.identity.core.context.user.domain.model.aggregate.UserAggregate;
-import br.com.trajy.delivery.infra.identity.core.feature.password.model.wrapper.input.CreateUserWithPasswordCredentialWrapperInput;
+import br.com.trajy.delivery.infra.identity.core.feature.password.model.wrapper.input.CreateWithPasswordCredentialWrapperInput;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +15,7 @@ public final class UserValidator {
         utilityClassUnsupportedInstantiationException();
     }
 
-    public static List<Error> validateUserUniqueFields(CreateUserWithPasswordCredentialWrapperInput input, UserAggregate user) {
+    public static List<Error> validateUserUniqueFields(CreateWithPasswordCredentialWrapperInput input, UserAggregate user) {
         final List<Error> errors = new ArrayList<>();
         if(user == null && input.email().equals(user.getEmail())) {
                 errors.add(Error.builder().description("User with email already exists").build());

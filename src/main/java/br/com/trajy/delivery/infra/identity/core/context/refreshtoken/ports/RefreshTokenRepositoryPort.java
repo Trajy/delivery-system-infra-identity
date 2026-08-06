@@ -7,4 +7,6 @@ import java.util.UUID;
 
 public interface RefreshTokenRepositoryPort extends BaseRepositoryPort<RefreshTokenAggregate, UUID> {
 
+    RefreshTokenAggregate findByRefreshTokenHash(String s);
+
 }

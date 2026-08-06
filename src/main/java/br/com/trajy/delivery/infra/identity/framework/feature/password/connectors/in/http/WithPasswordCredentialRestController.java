@@ -33,12 +33,7 @@ public class WithPasswordCredentialRestController {
 
     @PostMapping(path = "/logins", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<LoginWithPasswordCredentialResponseModel> login(@RequestBody LoginWithPasswordCredentialRequestModel requestModel) {
-        return ok(
-                this.mapper.toResponse(
-                        this.loginWithPasswordCredentialUseCase.execute(
-                               this.mapper.toInput(requestModel)
-                        )
-                )
+        return ok(this.mapper.toResponse(this.loginWithPasswordCredentialUseCase.execute(this.mapper.toInput(requestModel)))
         );
     }
 

@@ -35,8 +35,7 @@ public class PasswordCredentialRepositoryAdapter implements PasswordCredentialRe
     }
 
     @Override
-    public PasswordCredentialAggregate findByPasswordHash(String passwordHash) {
-        return this.repository.findByPasswordHash(passwordHash);
+    public PasswordCredentialAggregate findByIdentifier(String identifier) {
+        return null;
     }
-
 }

@@ -5,6 +5,6 @@ import br.com.trajy.delivery.infra.identity.core.context.credential.domain.model
 
 public interface PasswordCredentialRepositoryPort extends BaseRepositoryPort<PasswordCredentialAggregate, Long> {
 
-    PasswordCredentialAggregate findByPasswordHash(String passwordHash);
+    PasswordCredentialAggregate findByIdentifier(String identifier);
 
 }

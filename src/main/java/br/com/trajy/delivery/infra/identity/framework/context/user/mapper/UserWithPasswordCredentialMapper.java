@@ -2,7 +2,7 @@ package br.com.trajy.delivery.infra.identity.framework.context.user.mapper;
 
 import br.com.trajy.delivery.infra.identity.core.context.session.domain.model.aggregate.SessionAggregate;
 import br.com.trajy.delivery.infra.identity.core.context.user.domain.model.aggregate.UserAggregate;
-import br.com.trajy.delivery.infra.identity.core.feature.password.model.wrapper.input.CreateUserWithPasswordCredentialWrapperInput;
+import br.com.trajy.delivery.infra.identity.core.feature.password.model.wrapper.input.CreateWithPasswordCredentialWrapperInput;
 import br.com.trajy.delivery.infra.identity.core.feature.password.model.wrapper.input.LoginWithPasswordCredentialWrapperInput;
 import br.com.trajy.delivery.infra.identity.framework.context.user.model.CreateUserWithPasswordCredentialRequestModel;
 import br.com.trajy.delivery.infra.identity.framework.context.user.model.LoginWithPasswordCredentialRequestModel;
@@ -19,7 +19,7 @@ public interface UserWithPasswordCredentialMapper {
 
     UserEntity toEntity(UserAggregate aggregate);
 
-    CreateUserWithPasswordCredentialWrapperInput toInput(CreateUserWithPasswordCredentialRequestModel requestModel);
+    CreateWithPasswordCredentialWrapperInput toInput(CreateUserWithPasswordCredentialRequestModel requestModel);
 
     LoginWithPasswordCredentialWrapperInput toInput(LoginWithPasswordCredentialRequestModel requestModel);
 

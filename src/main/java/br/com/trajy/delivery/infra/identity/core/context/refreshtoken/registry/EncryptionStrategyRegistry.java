@@ -14,7 +14,7 @@ import static java.util.Objects.isNull;
 import static java.util.function.UnaryOperator.identity;
 import static java.util.stream.Collectors.toUnmodifiableMap;
 
-public final class EncryptionStrategyRegistry  {
+public final class EncryptionStrategyRegistry {
 
     private static Map<EncryptionType, EncryptionStrategyPort> strategies;
 

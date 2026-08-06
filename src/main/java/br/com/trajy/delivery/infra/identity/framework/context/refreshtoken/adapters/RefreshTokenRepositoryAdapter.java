@@ -36,4 +36,9 @@ public class RefreshTokenRepositoryAdapter implements RefreshTokenRepositoryPort
         this.repository.deleteById(id);
     }
 
+    @Override
+    public RefreshTokenAggregate findByRefreshTokenHash(String s) {
+        //TODO - findByRefreshTokenHash
+        return null;
+    }
 }
