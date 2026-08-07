@@ -5,6 +5,7 @@ import br.com.trajy.delivery.infra.identity.framework.common.entity.BaseUUIDEnti
 import br.com.trajy.delivery.infra.identity.framework.context.user.model.UserEntity;
 import br.com.trajy.delivery.infra.identity.core.context.credential.domain.model.enums.CredentialStatus;
 import br.com.trajy.delivery.infra.identity.core.context.credential.domain.model.enums.HashAlgorithmType;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.ForeignKey;
@@ -15,6 +16,8 @@ import lombok.Setter;
 
 import java.time.Instant;
 
+import static jakarta.persistence.CascadeType.ALL;
+import static jakarta.persistence.CascadeType.PERSIST;
 import static jakarta.persistence.EnumType.STRING;
 import static jakarta.persistence.FetchType.LAZY;
 
@@ -37,7 +40,7 @@ public class PasswordCredentialEntity extends BaseUUIDEntity {
     @Enumerated(STRING)
     private CredentialStatus status;
 
-    @OneToOne(fetch = LAZY, optional = false)
+    @OneToOne(fetch = LAZY, optional = false, cascade = PERSIST)
     @JoinColumn(name = "user_id", nullable = false, unique = true, foreignKey = @ForeignKey(name = "fk_password_credential_user"))
     private UserEntity user;
 

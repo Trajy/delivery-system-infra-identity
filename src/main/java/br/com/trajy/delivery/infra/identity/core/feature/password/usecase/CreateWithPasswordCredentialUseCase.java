@@ -32,19 +32,20 @@ public class CreateWithPasswordCredentialUseCase {
     }
 
     public void execute(CreateWithPasswordCredentialWrapperInput input) {
-        final ErrorContext<Error> errorContext = getErrorContext(CreateWithPasswordCredentialUseCase.class, validateInput(input));
+        final ErrorContext<Error> errorContext = getErrorContext(CreateWithPasswordCredentialUseCase.class);
+        this.validateInput(errorContext, input);
         final UserAggregate user = createUser(input.email());
         final PasswordCredentialAggregate passwordCredential = PasswordHashStrategyRegistry.get(input.hashAlgorithmType())
                 .createPasswordCredentialAggregate(input.password());
         populatePasswordCredential(passwordCredential, user, input);
-                this.credentialRepositoryPort.save(passwordCredential);
+        this.credentialRepositoryPort.save(passwordCredential);
         checkBusinessException(errorContext);
     }
 
-    private List<Error> validateInput(CreateWithPasswordCredentialWrapperInput input) {
-        final List<Error> errors = validatePassword(input.password());
-        errors.addAll(validateUserUniqueFields(input, this.userRepositoryPort.findByUniqueFields(input.email())));
-        return errors;
+    private void validateInput(ErrorContext<Error> errorContext, CreateWithPasswordCredentialWrapperInput input) {
+        errorContext.appendErrors(validatePassword(input.password()));
+        errorContext.appendErrors(validateUserUniqueFields(input, this.userRepositoryPort.findByUniqueFields(input.email())));
+        checkBusinessException(errorContext);
     }
 
 }

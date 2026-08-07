@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static br.com.trajy.delivery.infra.identity.core.common.exception.type.UnsupportedInstantiationException.utilityClassUnsupportedInstantiationException;
+import static java.util.Objects.nonNull;
 
 public final class UserValidator {
 
@@ -15,9 +16,9 @@ public final class UserValidator {
         utilityClassUnsupportedInstantiationException();
     }
 
-    public static List<Error> validateUserUniqueFields(CreateWithPasswordCredentialWrapperInput input, UserAggregate user) {
+    public static List<Error> validateUserUniqueFields(CreateWithPasswordCredentialWrapperInput input, UserAggregate userAggregate) {
         final List<Error> errors = new ArrayList<>();
-        if(user == null && input.email().equals(user.getEmail())) {
+        if(nonNull(userAggregate) && input.email().equals(userAggregate.getEmail())) {
                 errors.add(Error.builder().description("User with email already exists").build());
         }
         return errors;

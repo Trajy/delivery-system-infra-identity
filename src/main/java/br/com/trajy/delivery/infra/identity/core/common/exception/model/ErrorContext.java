@@ -3,6 +3,8 @@ package br.com.trajy.delivery.infra.identity.core.common.exception.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.util.Objects.nonNull;
+
 public class ErrorContext<T> {
 
     private final Class<?> originClazz;
@@ -10,7 +12,9 @@ public class ErrorContext<T> {
 
     private ErrorContext(ErrorContextBuilder<T> builder) {
         this.originClazz = builder.originClazz;
-        this.errors.addAll(builder.errors);
+        if(nonNull(builder.errors)) {
+            this.errors.addAll(builder.errors);
+        }
     }
 
     public Class<?> getOriginClazz() {
