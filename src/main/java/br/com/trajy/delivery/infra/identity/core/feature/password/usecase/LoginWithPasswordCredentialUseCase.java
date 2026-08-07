@@ -15,7 +15,7 @@ import br.com.trajy.delivery.infra.identity.core.feature.password.model.wrapper.
 import static br.com.trajy.delivery.infra.identity.core.common.exception.model.Error.withDescription;
 import static br.com.trajy.delivery.infra.identity.core.common.exception.model.ErrorContext.getErrorContext;
 import static br.com.trajy.delivery.infra.identity.core.common.exception.type.BusinessException.checkBusinessException;
-import static br.com.trajy.delivery.infra.identity.core.context.credential.domain.model.factory.PasswordCredentialFactory.createPasswordCredential;
+import static br.com.trajy.delivery.infra.identity.core.context.credential.domain.model.factory.PasswordCredentialFactory.populatePasswordCredential;
 import static br.com.trajy.delivery.infra.identity.core.context.credential.domain.util.PasswordCredentialValidator.validatePasswordCredentialConsistency;
 import static br.com.trajy.delivery.infra.identity.core.context.refreshtoken.domain.model.factory.RefreshTokenFactory.createRefreshToken;
 import static br.com.trajy.delivery.infra.identity.core.context.session.domain.model.factory.SessionFactory.createSession;
@@ -38,9 +38,8 @@ public class LoginWithPasswordCredentialUseCase {
     public SessionAggregate execute(LoginWithPasswordCredentialWrapperInput input) {
         final ErrorContext<Error> errorContext = getErrorContext(LoginWithPasswordCredentialUseCase.class);
         final PasswordCredentialAggregate passwordCredentialAggregate = this.passwordCredentialRepositoryPort.findByIdentifier(input.identifier());
-        final PasswordCredentialAggregate encryptedPasswordCredentialAggregate = PasswordHashStrategyRegistry.get(passwordCredentialAggregate.getHashAlgorithmType())
-                .populateWithEncrypt(createPasswordCredential(input, passwordCredentialAggregate.getUser()), input.password());
-        validatePasswordCredentialConsistency(errorContext.getOriginClazz(), encryptedPasswordCredentialAggregate, passwordCredentialAggregate);
+        final Boolean matches = PasswordHashStrategyRegistry.get(passwordCredentialAggregate.getHashAlgorithmType()).matches(input.password(), passwordCredentialAggregate);
+        validatePasswordCredentialConsistency(errorContext.getOriginClazz(), passwordCredentialAggregate, passwordCredentialAggregate);
         this.validateCredentials(errorContext, passwordCredentialAggregate, input);
         final RefreshTokenAggregate refreshTokenAggregate = createRefreshToken(input);
         EncryptionStrategyRegistry.get(refreshTokenAggregate.getEncryptionType()).populateToken(refreshTokenAggregate, input);

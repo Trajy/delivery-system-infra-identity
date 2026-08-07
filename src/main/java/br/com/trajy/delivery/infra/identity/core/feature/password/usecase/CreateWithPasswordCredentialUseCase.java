@@ -13,7 +13,7 @@ import java.util.List;
 
 import static br.com.trajy.delivery.infra.identity.core.common.exception.model.ErrorContext.getErrorContext;
 import static br.com.trajy.delivery.infra.identity.core.common.exception.type.BusinessException.checkBusinessException;
-import static br.com.trajy.delivery.infra.identity.core.context.credential.domain.model.factory.PasswordCredentialFactory.createPasswordCredential;
+import static br.com.trajy.delivery.infra.identity.core.context.credential.domain.model.factory.PasswordCredentialFactory.populatePasswordCredential;
 import static br.com.trajy.delivery.infra.identity.core.context.credential.domain.util.PasswordCredentialValidator.validatePassword;
 import static br.com.trajy.delivery.infra.identity.core.context.user.domain.model.factory.UserFactory.createUser;
 import static br.com.trajy.delivery.infra.identity.core.context.user.domain.util.UserValidator.validateUserUniqueFields;
@@ -35,8 +35,9 @@ public class CreateWithPasswordCredentialUseCase {
         final ErrorContext<Error> errorContext = getErrorContext(CreateWithPasswordCredentialUseCase.class, validateInput(input));
         final UserAggregate user = createUser(input.email());
         final PasswordCredentialAggregate passwordCredential = PasswordHashStrategyRegistry.get(input.hashAlgorithmType())
-                .populateWithEncrypt(createPasswordCredential(input, user), input.password());
-        this.credentialRepositoryPort.save(passwordCredential);
+                .createPasswordCredentialAggregate(input.password());
+        populatePasswordCredential(passwordCredential, user, input);
+                this.credentialRepositoryPort.save(passwordCredential);
         checkBusinessException(errorContext);
     }
 

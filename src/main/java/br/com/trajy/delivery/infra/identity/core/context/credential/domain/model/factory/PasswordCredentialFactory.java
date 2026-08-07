@@ -14,20 +14,16 @@ public final class PasswordCredentialFactory {
         utilityClassUnsupportedInstantiationException();
     }
 
-    public static PasswordCredentialAggregate createPasswordCredential(CreateWithPasswordCredentialWrapperInput input, UserAggregate userAggregate) {
-        final PasswordCredentialAggregate aggregate = new PasswordCredentialAggregate();
+    public static void populatePasswordCredential(PasswordCredentialAggregate aggregate, UserAggregate userAggregate, CreateWithPasswordCredentialWrapperInput input) {
         aggregate.setUser(userAggregate);
         aggregate.setHashAlgorithmType(input.hashAlgorithmType());
         aggregate.setStatus(ACTIVE);
-        return aggregate;
     }
 
-    public static PasswordCredentialAggregate createPasswordCredential(LoginWithPasswordCredentialWrapperInput input, UserAggregate userAggregate) {
-        final PasswordCredentialAggregate aggregate = new PasswordCredentialAggregate();
+    public static void populatePasswordCredential(PasswordCredentialAggregate aggregate, UserAggregate userAggregate, LoginWithPasswordCredentialWrapperInput input) {
         aggregate.setUser(userAggregate);
         aggregate.setHashAlgorithmType(input.hashAlgorithmType());
         aggregate.setStatus(ACTIVE);
-        return aggregate;
     }
 
 }

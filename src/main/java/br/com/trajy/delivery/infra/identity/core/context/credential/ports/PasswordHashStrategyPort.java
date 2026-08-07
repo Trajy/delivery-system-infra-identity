@@ -4,6 +4,8 @@ import br.com.trajy.delivery.infra.identity.core.context.credential.domain.model
 
 public interface PasswordHashStrategyPort {
 
-    PasswordCredentialAggregate populateWithEncrypt(PasswordCredentialAggregate aggregateToFill, String password);
+    PasswordCredentialAggregate createPasswordCredentialAggregate(String password);
+
+    Boolean matches(String password, PasswordCredentialAggregate passwordCredentialAggregate);
 
 }
